@@ -18,7 +18,10 @@ $botman->hears('call me {name}', function ($bot, $name) {
 
 $botman->hears('call me {name} the {adjective}', function ($bot, $name, $adjective) {
     $bot->reply('Hello '.$name.'. You truly are '.$adjective);
-    
+});
+
+$botman->hears('Give me details', function ($bot, $name, $adjective) {
+    $bot->reply('Sure thing! One second...');
 });
 
 // $storage = $botman->userStorage();
