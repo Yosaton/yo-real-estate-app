@@ -7,7 +7,7 @@ use BotMan\BotMan\Drivers\DriverManager;
 
 $config = [
   'facebook' => [
-  	'token' => 'EAAE3LgC5qc0BABy5FZA0BGgxQQZCBoR0ZAOAmx2488qQZB0BW75ZBik3U2kXqJX2VlOve9IOjE8vFAc7rxbOeTAZCjLUZCm5Qj1dKDgJQ3oDg0gY7sbtNtSclDTruLiygy1dKoOZAJ1oyTlMZC74K1an9H4ubOJ1OGAkXZBinxdtInbgZDZD',
+  	'token' => 'EAAE3LgC5qc0BAG33Hj4hot3j9rx4ZC7wQeuGlMprbm1secBJHwmYyyi3312vOkoUMKdD583b1BdZBSibfxaCzo48mr18O23j8djlBP5YZCIxAN20CzIMhgnyZBPRHNpSGwrNlziZBwMhlpLNjAbk9YVlXkHaGH8e0c2xG5Fu9ZBgZDZD',
 	'app_secret' => 'ac2d2709515cd77dc9eccfdc6f0665e1',
     'verification'=>'yosaton_tungmanelatkul',
 ]
