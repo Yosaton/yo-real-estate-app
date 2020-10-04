@@ -24,6 +24,10 @@ $botman->hears('Give me details', function ($bot, $name, $adjective) {
     $bot->reply('Sure thing! One second...');
 });
 
+$botman->hears('Hello', function ($bot, $name, $adjective) {
+    $bot->reply('Hey there!');
+});
+
 // $storage = $botman->userStorage();
 
 // dd($storage, "storage");
