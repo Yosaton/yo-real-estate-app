@@ -1,5 +1,5 @@
 <?php 
-require './vendor/autoload.php';
+require 'vendor/autoload.php';
 // header('HTTP/1.1 200 OK');
 use BotMan\BotMan\BotMan;
 use BotMan\BotMan\BotManFactory;
