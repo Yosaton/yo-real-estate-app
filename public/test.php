@@ -21,9 +21,9 @@ use BotMan\BotMan\Drivers\DriverManager;
 
 $config = [
   'facebook' => [
-  	'token' => getenv("EAAE3LgC5qc0BAAC6xz5hheZAsUfNgvSZAPsrpzQW9zOXMinvZAtcFmYZA2b5kQIqMZAB12Cp3GZCg6tvWojs7H51Kl5BHdMdAx4XzLhiOyeB4g65sY8iMIZCHTIvauy3ZBnZAul4lcZBWjZBimDeBi1tIbakkB7aaQtDPQZCZABLhUgX0ZBQZDZD"),
-	'app_secret' => getenv("ac2d2709515cd77dc9eccfdc6f0665e1"),
-    'verification'=>getenv("abc_123"),
+  	'token' => "EAAE3LgC5qc0BAAC6xz5hheZAsUfNgvSZAPsrpzQW9zOXMinvZAtcFmYZA2b5kQIqMZAB12Cp3GZCg6tvWojs7H51Kl5BHdMdAx4XzLhiOyeB4g65sY8iMIZCHTIvauy3ZBnZAul4lcZBWjZBimDeBi1tIbakkB7aaQtDPQZCZABLhUgX0ZBQZDZD",
+	'app_secret' => "ac2d2709515cd77dc9eccfdc6f0665e1",
+    'verification'=>"abc_123",
   ]
 ];
 
