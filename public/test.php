@@ -14,12 +14,16 @@ use BotMan\BotMan\Drivers\DriverManager;
 // dd($facebook_verification,"facebook_verification");
 // dd($facebook_app_secret,"facebook_app_secret");
 
+// FACEBOOK_TOKEN=EAAE3LgC5qc0BAAC6xz5hheZAsUfNgvSZAPsrpzQW9zOXMinvZAtcFmYZA2b5kQIqMZAB12Cp3GZCg6tvWojs7H51Kl5BHdMdAx4XzLhiOyeB4g65sY8iMIZCHTIvauy3ZBnZAul4lcZBWjZBimDeBi1tIbakkB7aaQtDPQZCZABLhUgX0ZBQZDZD
+// FACEBOOK_APP_SECRET=ac2d2709515cd77dc9eccfdc6f0665e1
+// FACEBOOK_VERIFICATION=abc_123
+
 
 $config = [
   'facebook' => [
-  	'token' => getenv("FACEBOOK_TOKEN"),
-	'app_secret' => getenv("FACEBOOK_APP_SECRET"),
-    'verification'=>getenv("FACEBOOK_VERIFICATION"),
+  	'token' => getenv("EAAE3LgC5qc0BAAC6xz5hheZAsUfNgvSZAPsrpzQW9zOXMinvZAtcFmYZA2b5kQIqMZAB12Cp3GZCg6tvWojs7H51Kl5BHdMdAx4XzLhiOyeB4g65sY8iMIZCHTIvauy3ZBnZAul4lcZBWjZBimDeBi1tIbakkB7aaQtDPQZCZABLhUgX0ZBQZDZD"),
+	'app_secret' => getenv("ac2d2709515cd77dc9eccfdc6f0665e1"),
+    'verification'=>getenv("abc_123"),
   ]
 ];
 
