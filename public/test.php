@@ -6,11 +6,15 @@ use BotMan\BotMan\BotMan;
 use BotMan\BotMan\BotManFactory;
 use BotMan\BotMan\Drivers\DriverManager;
 
+$facebook_token = getenv("FACEBOOK_TOKEN");
+$facebook_verification = getenv("FACEBOOK_VERIFICATION");
+$facebook_app_secret = getenv("FACEBOOK_APP_SECRET");
+
 $config = [
   'facebook' => [
-  	'token' => 'EAAE3LgC5qc0BAJzuRKGsVQYYy52gNJjLsXt4EafVjaAMceapduBEMuh6qxOe7Y9Sll9UkPXYKuEFpB77zFZB7eZAP9e386vUOJy3CXU76AMINH7pG24NUQUtS4SmpfKWstJbVanE0cuwEzqNWBZBSGM7TZCmxO0ZCZC7IklrOD0wZDZD',
-	  'app_secret' => 'ac2d2709515cd77dc9eccfdc6f0665e1',
-    'verification'=>'abc_123',
+  	'token' => $facebook_token,
+	'app_secret' => $facebook_app_secret,
+    'verification'=>$facebook_verification,
   ]
 ];
 
