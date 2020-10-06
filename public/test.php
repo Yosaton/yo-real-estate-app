@@ -9,10 +9,6 @@ use BotMan\BotMan\Drivers\DriverManager;
 $facebook_token = getenv("FACEBOOK_TOKEN");
 $facebook_verification = getenv("FACEBOOK_VERIFICATION");
 $facebook_app_secret = getenv("FACEBOOK_APP_SECRET");
-// dd($facebook_token, "facebook_token");
-// dd($facebook_verification, "facebook_verification");
-dd($facebook_app_secret, "facebook_app_secret");
-
 
 $config = [
   'facebook' => [
