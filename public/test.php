@@ -6,6 +6,10 @@ use BotMan\BotMan\BotMan;
 use BotMan\BotMan\BotManFactory;
 use BotMan\BotMan\Drivers\DriverManager;
 
+
+// use Illuminate\Config;
+// use Config;
+
 // $facebook_token = getenv("FACEBOOK_TOKEN");
 // $facebook_app_secret = getenv("FACEBOOK_APP_SECRET");
 // $facebook_verification = getenv("FACEBOOK_VERIFICATION");
@@ -14,16 +18,22 @@ use BotMan\BotMan\Drivers\DriverManager;
 // dd($facebook_verification,"facebook_verification");
 // dd($facebook_app_secret,"facebook_app_secret");
 
-// FACEBOOK_TOKEN=EAAE3LgC5qc0BAAC6xz5hheZAsUfNgvSZAPsrpzQW9zOXMinvZAtcFmYZA2b5kQIqMZAB12Cp3GZCg6tvWojs7H51Kl5BHdMdAx4XzLhiOyeB4g65sY8iMIZCHTIvauy3ZBnZAul4lcZBWjZBimDeBi1tIbakkB7aaQtDPQZCZABLhUgX0ZBQZDZD
-// FACEBOOK_VERIFICATION=abc_123
-// FACEBOOK_APP_SECRET=ac2d2709515cd77dc9eccfdc6f0665e1
+$FACEBOOK_TOKEN="EAAE3LgC5qc0BAAC6xz5hheZAsUfNgvSZAPsrpzQW9zOXMinvZAtcFmYZA2b5kQIqMZAB12Cp3GZCg6tvWojs7H51Kl5BHdMdAx4XzLhiOyeB4g65sY8iMIZCHTIvauy3ZBnZAul4lcZBWjZBimDeBi1tIbakkB7aaQtDPQZCZABLhUgX0ZBQZDZD";
+$FACEBOOK_VERIFICATION="abc_123";
+$FACEBOOK_APP_SECRET="ac2d2709515cd77dc9eccfdc6f0665e1";
+
+// $pop = Config::get('services.facebook.facebook_token');
+// $pop = config('services.facebook.facebook_token');
+
+// Config::get('services.facebook.facebook_app_secret');
+// Config::get('services.facebook.facebook_verification');
 
 
 $config = [
   'facebook' => [
-  	'token' => getenv('FACEBOOK_TOKEN'),
-	'app_secret' => getenv('FACEBOOK_APP_SECRET'),
-    'verification'=>getenv('FACEBOOK_VERIFICATION'),
+  	'token' => $FACEBOOK_TOKEN,
+	'app_secret' => $FACEBOOK_VERIFICATION,
+    'verification'=>$FACEBOOK_APP_SECRET,
   ]
 ];
 
@@ -47,7 +57,7 @@ $botman = BotManFactory::create($config);
 // });
 
 $botman->hears('', function (BotMan $bot) {
-  $bot->reply('u suck');
+  $bot->reply('Hello! No representatives are available right now. Perhaps I can help you.');
 });
 
 // Start listening
