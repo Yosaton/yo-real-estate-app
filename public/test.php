@@ -32,8 +32,8 @@ $FACEBOOK_APP_SECRET="ac2d2709515cd77dc9eccfdc6f0665e1";
 $config = [
   'facebook' => [
   	'token' => $FACEBOOK_TOKEN,
-	'app_secret' => $FACEBOOK_VERIFICATION,
-    'verification'=>$FACEBOOK_APP_SECRET,
+	'app_secret' => $FACEBOOK_APP_SECRET,
+    'verification'=>$FACEBOOK_VERIFICATION,
   ]
 ];
 
