@@ -93,10 +93,10 @@ class OnboardingConversation extends Conversation
             $selectedText = $answer->getText(); // will be either 1-3 monts, 3-6 months, or 6 months +
         }
 
+        
+      });
     $this->say('Great!');
     $this->askPrequalified();
-        
-    });
 }
 
 public function askPrequalified()
