@@ -5,6 +5,12 @@ require '../vendor/autoload.php';
 use BotMan\BotMan\BotMan;
 use BotMan\BotMan\BotManFactory;
 use BotMan\BotMan\Drivers\DriverManager;
+use App\Http\Controllers\BotManController;
+use BotMan\Drivers\Facebook\Commands\AddStartButtonPayload;
+use BotMan\Drivers\Facebook\Commands\AddGreetingText;
+use BotMan\Drivers\Facebook\Extensions\ButtonTemplate;
+use BotMan\Drivers\Facebook\Extensions\ElementButton;
+
 
 
 // use Illuminate\Config;
@@ -64,10 +70,15 @@ $botman = BotManFactory::create($config);
 //   $bot->reply('Oh, ok. How else can I assist you today?');
 // });
 
-$botman->hears('', function (BotMan $bot) {
-  $bot->reply('Welcome to 123 Main Street Bot - I see you are looking to purchase a home.  Are you looking to buy in:')
-  ->addButton(ElementButton::create('Tell me more')->type('postback')->payload('tellmemore'));
-});
+// $botman->hears('', function (BotMan $bot) {
+//   $bot->reply('Welcome to 123 Main Street Bot - I see you are looking to purchase a home.  Are you looking to buy in:')
+//   ->addButton(ElementButton::create('Tell me more')->type('postback')->payload('tellmemore'));
+// });
+
+$botman->reply(ButtonTemplate::create('Do you want to know more about BotMan?')
+	->addButton(ElementButton::create('Tell me more')->type('postback')->payload('tellmemore'))
+	->addButton(ElementButton::create('Show me the docs')->url('http://botman.io/'))
+);
 
 // Start listening
 $botman->listen();
