@@ -49,8 +49,6 @@ class OnboardingConversation extends Conversation
             $this->say('Great!');
             $this->askPrequalified();
         }
-
-        
     });
 }
 
@@ -71,9 +69,73 @@ class OnboardingConversation extends Conversation
                 $selectedText = $answer->getText(); // will be either yes or no
             }
 
-        $this->say('Woohoo!');
-        // $this->askPrequalified();
+        $this->askPriceRange();
             
+        });
+    }
+
+    public function askPriceRange()
+    {
+        $question = Question::create('What price range are you looking in?')
+            ->fallback('Unable to funnel lead')
+            ->callbackId('lead_funneled')
+            ->addButtons([
+                Button::create('$200k - $400k')->value('$200k - $400k'),
+                Button::create('$400k - $600k')->value('$400k - $600k'),
+                Button::create('$600k +')->value('$600k +'),
+            ]);
+
+        $this->ask($question, function (Answer $answer) {
+            // Detect if button was clicked:
+            if ($answer->isInteractiveMessageReply()) {
+                $selectedValue = $answer->getValue();
+                $selectedText = $answer->getText(); 
+            }
+
+        $this->say('Great!');
+        $this->confirmEmail();  
+        });
+    }
+
+    public function confirmEmail()
+    {
+        $question = Question::create('Is this your email? (insert email)' )
+            ->fallback('Unable to funnel lead')
+            ->callbackId('lead_funneled')
+            ->addButtons([
+                Button::create('Yes')->value('Yes'),
+                Button::create('No')->value('No'),
+            ]);
+
+        $this->ask($question, function (Answer $answer) {
+            // Detect if button was clicked:
+            if ($answer->isInteractiveMessageReply()) {
+                $selectedValue = $answer->getValue();
+                $selectedText = $answer->getText(); 
+            }
+
+        $this->confirmPhoneNumber();  
+        });
+    }
+
+    public function confirmPhoneNumber()
+    {
+        $question = Question::create('Is this your phone number? (phone number)' )
+            ->fallback('Unable to funnel lead')
+            ->callbackId('lead_funneled')
+            ->addButtons([
+                Button::create('Yes')->value('Yes'),
+                Button::create('No')->value('No'),
+            ]);
+
+        $this->ask($question, function (Answer $answer) {
+            // Detect if button was clicked:
+            if ($answer->isInteractiveMessageReply()) {
+                $selectedValue = $answer->getValue();
+                $selectedText = $answer->getText(); 
+            }
+
+        $this->say('Sounds good... I will be in in touch.');
         });
     }
 
