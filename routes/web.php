@@ -15,5 +15,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::view('/questions', 'questions');
+Route::view('/thankyou', 'thankyou');
+
+
+
 Route::match(['get', 'post'], '/botman', 'BotManController@handle');
 Route::get('/botman/tinker', 'BotManController@tinker');
+
+// Route::get('/', function () {
+//     return view('questions');
+// });

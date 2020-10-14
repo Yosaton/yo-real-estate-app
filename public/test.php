@@ -32,10 +32,18 @@ $FACEBOOK_APP_SECRET="ac2d2709515cd77dc9eccfdc6f0665e1";
 $config = [
   'facebook' => [
   	'token' => $FACEBOOK_TOKEN,
-	'app_secret' => $FACEBOOK_APP_SECRET,
+	  'app_secret' => $FACEBOOK_APP_SECRET,
     'verification'=>$FACEBOOK_VERIFICATION,
   ]
 ];
+
+
+session_start();
+
+$var_value = $_REQUEST['varname'];
+
+
+
 
 // Load the driver(s) you want to use
 DriverManager::loadDriver(\BotMan\Drivers\Facebook\FacebookDriver::class);
@@ -57,7 +65,8 @@ $botman = BotManFactory::create($config);
 // });
 
 $botman->hears('', function (BotMan $bot) {
-  $bot->reply('Hello! No representatives are available right now. Perhaps I can help you.');
+  $bot->reply('Welcome to 123 Main Street Bot - I see you are looking to purchase a home.  Are you looking to buy in:')
+  ->addButton(ElementButton::create('Tell me more')->type('postback')->payload('tellmemore'));
 });
 
 // Start listening
