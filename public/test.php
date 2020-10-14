@@ -75,11 +75,18 @@ $botman = BotManFactory::create($config);
 //   ->addButton(ElementButton::create('Tell me more')->type('postback')->payload('tellmemore'));
 // });
 
-$botman->hears('hello', function (BotMan $bot) {
-  $bot->reply(ButtonTemplate::create('Do you want to know more about BotMan?')
-    ->addButton(ElementButton::create('Tell me more')->type('postback')->payload('tellmemore'))
-    ->addButton(ElementButton::create('Show me the docs')->url('http://botman.io/'))
-  );
+// $botman->hears('hello', function (BotMan $bot) {
+//   $bot->reply(ButtonTemplate::create('Do you want to know more about BotMan?')
+//     ->addButton(ElementButton::create('Tell me more')->type('postback')->payload('tellmemore'))
+//     ->addButton(ElementButton::create('Show me the docs')->url('http://botman.io/'))
+//   );
+// });
+
+$botman->hears('hello', function ($bot) {
+	$bot->reply(ButtonTemplate::create('hello?')
+		->addButton(ElementButton::create('Button1')->type('postback')->payload('https://botman.io'))
+		->addButton(ElementButton::create('Button2')->url('https://test.io'))
+	);
 });
 
 
