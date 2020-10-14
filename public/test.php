@@ -89,6 +89,26 @@ $botman->hears('hello', function ($bot) {
     ->addButton(ElementButton::create('6 months +')->url('https://test.io'))
   );
 });
+
+$botman->hears('1-3 months', function ($bot) {
+	$bot->reply(ButtonTemplate::create('Great - Have you been prequalified by a mortgage loan officer yet?')
+		->addButton(ElementButton::create('Yes')->type('postback')->payload('https://botman.io'))
+    ->addButton(ElementButton::create('No')->url('https://test.io'))
+  );
+});
+
+$botman->hears('Yes?', function ($bot) {
+	$bot->reply(ButtonTemplate::create('What price range are you looking in?')
+		->addButton(ElementButton::create('$200k - $400k')->type('postback')->payload('https://botman.io'))
+    ->addButton(ElementButton::create('$400k - $600k')->url('https://test.io'))
+    ->addButton(ElementButton::create('$600k +')->url('https://test.io'))
+
+  );
+});
+
+
+
+
 //   $bot->ask('Whats your name?', function($answer, $bot) {
 //     $bot->say('Welcome '.$answer->getText()); //this never works
 // )}
