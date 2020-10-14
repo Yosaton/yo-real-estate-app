@@ -63,7 +63,6 @@ DriverManager::loadDriver(\BotMan\Drivers\Facebook\FacebookDriver::class);
 // Create an instance
 $botman = BotManFactory::create($config);
 
-
 $botman->hears('Hello', function($bot) {
   $bot->startConversation(new OnboardingConversation);
 });
@@ -71,115 +70,65 @@ $botman->hears('Hello', function($bot) {
 
 class OnboardingConversation extends Conversation
 {
-    protected $firstname;
+  protected $firstname;
 
-    protected $email;
+  protected $email;
 
-    public function welcome()
+  public function welcome()
 {
-    $question = Question::create('Welcome to 123 Main Street Bot - I see you are looking to purchase a home.  Are you looking to buy in:')
-        ->fallback('Unable to funnel lead')
-        ->callbackId('lead_funneled')
-        ->addButtons([
-            Button::create('1-3 months')->value('1-3 months'),
-            Button::create('3-6 months')->value('3-6 months'),
-            Button::create('6 months +')->value('6 months +'),
-        ]);
+  $question = Question::create('Welcome to 123 Main Street Bot - I see you are looking to purchase a home.  Are you looking to buy in:')
+      ->fallback('Unable to funnel lead')
+      ->callbackId('lead_funneled')
+      ->addButtons([
+          Button::create('1-3 months')->value('1-3 months'),
+          Button::create('3-6 months')->value('3-6 months'),
+          Button::create('6 months +')->value('6 months +'),
+      ]);
 
-    $this->ask($question, function (Answer $answer) {
-        // Detect if button was clicked:
-        if ($answer->isInteractiveMessageReply()) {
-            $selectedValue = $answer->getValue(); // will be either 1-3 monts, 3-6 months, or 6 months +
-            $selectedText = $answer->getText(); // will be either 1-3 monts, 3-6 months, or 6 months +
-            $this->say('Great!');
-            $this->askPrequalified();
-        }
+  $this->ask($question, function (Answer $answer) {
+      // Detect if button was clicked:
+      if ($answer->isInteractiveMessageReply()) {
+          $selectedValue = $answer->getValue(); // will be either 1-3 monts, 3-6 months, or 6 months +
+          $selectedText = $answer->getText(); // will be either 1-3 monts, 3-6 months, or 6 months +
+          $this->say('Great!');
+          $this->askPrequalified();
+      }
 
-        
-    });
+      
+  });
 }
 
-public function askPrequalified()
-{
-    $question = Question::create('Have you been prequalified by a mortgage loan officer yet?')
-        ->fallback('Unable to funnel lead')
-        ->callbackId('lead_funneled')
-        ->addButtons([
-            Button::create('Yes')->value('yes'),
-            Button::create('No')->value('no'),
-        ]);
+  public function askPrequalified()
+  {
+      $question = Question::create('Have you been prequalified by a mortgage loan officer yet?')
+          ->fallback('Unable to funnel lead')
+          ->callbackId('lead_funneled')
+          ->addButtons([
+              Button::create('Yes')->value('yes'),
+              Button::create('No')->value('no'),
+          ]);
 
-    $this->ask($question, function (Answer $answer) {
-        // Detect if button was clicked:
-        if ($answer->isInteractiveMessageReply()) {
-            $selectedValue = $answer->getValue(); // will be either Yes or No
-            $selectedText = $answer->getText(); // will be either yes or no
-        }
+      $this->ask($question, function (Answer $answer) {
+          // Detect if button was clicked:
+          if ($answer->isInteractiveMessageReply()) {
+              $selectedValue = $answer->getValue(); // will be either Yes or No
+              $selectedText = $answer->getText(); // will be either yes or no
+          }
 
-    $this->say('Woohoo!');
-    // $this->askPrequalified();
-        
-    });
-}
-
-
+      $this->say('Woohoo!');
+      // $this->askPrequalified();
+          
+      });
+  }
 
 
-    // public function askFirstname()
-    // {
-    //     $this->ask('Welcome to 123 Main Street Bot - I see you are looking to purchase a home.  Are you looking to buy in:', function(Answer $answer) {
-    //         // Save result
-    //         $this->firstname = $answer->getText();
-
-    //         $this->say('Nice to meet you '.$this->firstname);
-    //         $this->askEmail();
-    //     });
-    // }
-
-    // public function askEmail()
-    // {
-    //     $this->ask('One more thing - what is your email?', function(Answer $answer) {
-    //         // Save result
-    //         $this->email = $answer->getText();
-
-    //         $this->say('Great - that is all we need, '.$this->firstname);
-    //     });
-    // }
-
-    public function run()
-    {
-        // This will be called immediately
-        $this->welcome();
-    }
+  public function run()
+  {
+      // This will be called immediately
+      $this->welcome();
+  }
 }
 
 
-// $botman->hears('hello', function ($bot) {
-// 	$bot->reply(ButtonTemplate::create('Welcome to 123 Main Street Bot - I see you are looking to purchase a home.  Are you looking to buy in:')
-// 		->addButton(ElementButton::create('1-3 months')->type('postback')->payload('https://botman.io'))
-//     ->addButton(ElementButton::create('3-6 months')->url('https://test.io'))
-//     ->addButton(ElementButton::create('6 months +')->url('https://test.io'))
-//   );
-// });
 
-// $botman->hears('1-3 months', function ($bot) {
-// 	$bot->reply(ButtonTemplate::create('Great - Have you been prequalified by a mortgage loan officer yet?')
-// 		->addButton(ElementButton::create('Yes')->type('postback')->payload('https://botman.io'))
-//     ->addButton(ElementButton::create('No')->url('https://test.io'))
-//   );
-// });
-
-// $botman->hears('Yes?', function ($bot) {
-// 	$bot->reply(ButtonTemplate::create('What price range are you looking in?')
-// 		->addButton(ElementButton::create('$200k - $400k')->type('postback')->payload('https://botman.io'))
-//     ->addButton(ElementButton::create('$400k - $600k')->url('https://test.io'))
-//     ->addButton(ElementButton::create('$600k +')->url('https://test.io'))
-
-//   );
-// });
-
-
-
-
-// Start listening
-$botman->listen();
+$botman->hears('Start conversation', BotManController::class.'@startConversation');
