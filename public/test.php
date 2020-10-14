@@ -10,6 +10,8 @@ use BotMan\Drivers\Facebook\Commands\AddStartButtonPayload;
 use BotMan\Drivers\Facebook\Commands\AddGreetingText;
 use BotMan\Drivers\Facebook\Extensions\ButtonTemplate;
 use BotMan\Drivers\Facebook\Extensions\ElementButton;
+use BotMan\BotMan\Messages\Conversations\Conversation;
+
 
 
 
@@ -69,31 +71,51 @@ class OnboardingConversation extends Conversation
 
     protected $email;
 
-    public function askFirstname()
-    {
-        $this->ask('Hello! What is your firstname?', function(Answer $answer) {
-            // Save result
-            $this->firstname = $answer->getText();
+    public function askForDatabase()
+{
+    $question = Question::create('Do you need a database?')
+        ->fallback('Unable to create a new database')
+        ->callbackId('create_database')
+        ->addButtons([
+            Button::create('Of course')->value('yes'),
+            Button::create('Hell no!')->value('no'),
+        ]);
 
-            $this->say('Nice to meet you '.$this->firstname);
-            $this->askEmail();
-        });
-    }
+    $this->ask($question, function (Answer $answer) {
+        // Detect if button was clicked:
+        if ($answer->isInteractiveMessageReply()) {
+            $selectedValue = $answer->getValue(); // will be either 'yes' or 'no'
+            $selectedText = $answer->getText(); // will be either 'Of course' or 'Hell no!'
+        }
+    });
+}
 
-    public function askEmail()
-    {
-        $this->ask('One more thing - what is your email?', function(Answer $answer) {
-            // Save result
-            $this->email = $answer->getText();
 
-            $this->say('Great - that is all we need, '.$this->firstname);
-        });
-    }
+    // public function askFirstname()
+    // {
+    //     $this->ask('Welcome to 123 Main Street Bot - I see you are looking to purchase a home.  Are you looking to buy in:', function(Answer $answer) {
+    //         // Save result
+    //         $this->firstname = $answer->getText();
+
+    //         $this->say('Nice to meet you '.$this->firstname);
+    //         $this->askEmail();
+    //     });
+    // }
+
+    // public function askEmail()
+    // {
+    //     $this->ask('One more thing - what is your email?', function(Answer $answer) {
+    //         // Save result
+    //         $this->email = $answer->getText();
+
+    //         $this->say('Great - that is all we need, '.$this->firstname);
+    //     });
+    // }
 
     public function run()
     {
         // This will be called immediately
-        $this->askFirstname();
+        $this->askForDatabase();
     }
 }
 

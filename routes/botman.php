@@ -2,16 +2,59 @@
 use App\Http\Controllers\BotManController;
 use BotMan\Drivers\Facebook\Commands\AddStartButtonPayload;
 use BotMan\Drivers\Facebook\Commands\AddGreetingText;
-
 use BotMan\Drivers\Facebook\Extensions\ButtonTemplate;
 use BotMan\Drivers\Facebook\Extensions\ElementButton;
+use BotMan\BotMan\Messages\Conversations\Conversation;
+use BotMan\BotMan\Messages\Incoming\Answer;
 
 $botman = resolve('botman');
 
-$botman->hears('Hi', function ($bot) {
-    $bot->typesAndWaits(2);
-    $bot->reply('Hello!');
-});
+// $botman->hears('Hi', function ($bot) {
+//     $bot->typesAndWaits(2);
+//     $bot->reply('Hello!');
+// });
+
+
+
+$botman->hears('Hello', function($bot) {
+    $bot->startConversation(new OnboardingConversation);
+  });
+  
+  
+  class OnboardingConversation extends Conversation
+  {
+      protected $firstname;
+  
+      protected $email;
+  
+      public function askFirstname()
+      {
+          $this->ask('Hello! What is your firstname?', function(Answer $answer) {
+              // Save result
+              $this->firstname = $answer->getText();
+  
+              $this->say('Nice to meet you '.$this->firstname);
+              $this->askEmail();
+          });
+      }
+  
+      public function askEmail()
+      {
+          $this->ask('One more thing - what is your email?', function(Answer $answer) {
+              // Save result
+              $this->email = $answer->getText();
+  
+              $this->say('Great - that is all we need, '.$this->firstname);
+          });
+      }
+  
+      public function run()
+      {
+          // This will be called immediately
+          $this->askFirstname();
+      }
+  }
+  
 
 
 // $botman->hears('GET_STARTED', function ($bot) {
@@ -28,10 +71,10 @@ $botman->hears('Hi', function ($bot) {
 //     });
 // });
 
-$botman->reply(ButtonTemplate::create('Do you want to know more about BotMan?')
-	->addButton(ElementButton::create('Tell me more')->type('postback')->payload('tellmemore'))
-	->addButton(ElementButton::create('Show me the docs')->url('http://botman.io/'))
-);
+// $botman->reply(ButtonTemplate::create('Do you want to know more about BotMan?')
+// 	->addButton(ElementButton::create('Tell me more')->type('postback')->payload('tellmemore'))
+// 	->addButton(ElementButton::create('Show me the docs')->url('http://botman.io/'))
+// );
 
 // $botman->hears('GET_STARTED', function ($bot) {
 //     $bot->typesAndWaits(1);
