@@ -44,9 +44,9 @@ $config = [
 ];
 
 
-session_start();
+// session_start();
 
-$var_value = $_REQUEST['varname'];
+// $var_value = $_REQUEST['varname'];
 
 
 
