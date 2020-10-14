@@ -15,10 +15,6 @@ use BotMan\BotMan\Messages\Incoming\Answer;
 use BotMan\BotMan\Messages\Outgoing\Actions\Button;
 use BotMan\BotMan\Messages\Outgoing\Question;
 
-
-
-
-
 // use Illuminate\Config;
 // use Config;
 
@@ -91,33 +87,32 @@ class OnboardingConversation extends Conversation
         if ($answer->isInteractiveMessageReply()) {
             $selectedValue = $answer->getValue(); // will be either 1-3 monts, 3-6 months, or 6 months +
             $selectedText = $answer->getText(); // will be either 1-3 monts, 3-6 months, or 6 months +
-            $this->say('Great!');
-            $this->askPrequalified();
-        }
+          }
     });
+          $this->say('Great!');
+          $this->askPrequalified();
 }
 
     public function askPrequalified()
     {
-        // $question = Question::create('Have you been prequalified by a mortgage loan officer yet?')
-        //     ->fallback('Unable to funnel lead')
-        //     ->callbackId('lead_funneled')
-        //     ->addButtons([
-        //         Button::create('Yes')->value('yes'),
-        //         Button::create('No')->value('no'),
-        //     ]);
+        $question = Question::create('Have you been prequalified by a mortgage loan officer yet?')
+            ->fallback('Unable to funnel lead')
+            ->callbackId('lead_funneled')
+            ->addButtons([
+                Button::create('Yes')->value('yes'),
+                Button::create('No')->value('no'),
+            ]);
 
-        // $this->ask($question, function (Answer $answer) {
-        //     // Detect if button was clicked:
-        //     if ($answer->isInteractiveMessageReply()) {
-        //         $selectedValue = $answer->getValue(); // will be either Yes or No
-        //         $selectedText = $answer->getText(); // will be either yes or no
-        //     }
+        $this->ask($question, function (Answer $answer) {
+            // Detect if button was clicked:
+            if ($answer->isInteractiveMessageReply()) {
+                $selectedValue = $answer->getValue(); // will be either Yes or No
+                $selectedText = $answer->getText(); // will be either yes or no
+            }
 
-        // $this->askPriceRange();
+        $this->askPriceRange();
             
-        // });
-        $this->say('awww yeah');
+        });
     }
 
     public function askPriceRange()
