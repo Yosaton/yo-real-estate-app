@@ -99,24 +99,25 @@ class OnboardingConversation extends Conversation
 
     public function askPrequalified()
     {
-        $question = Question::create('Have you been prequalified by a mortgage loan officer yet?')
-            ->fallback('Unable to funnel lead')
-            ->callbackId('lead_funneled')
-            ->addButtons([
-                Button::create('Yes')->value('yes'),
-                Button::create('No')->value('no'),
-            ]);
+        // $question = Question::create('Have you been prequalified by a mortgage loan officer yet?')
+        //     ->fallback('Unable to funnel lead')
+        //     ->callbackId('lead_funneled')
+        //     ->addButtons([
+        //         Button::create('Yes')->value('yes'),
+        //         Button::create('No')->value('no'),
+        //     ]);
 
-        $this->ask($question, function (Answer $answer) {
-            // Detect if button was clicked:
-            if ($answer->isInteractiveMessageReply()) {
-                $selectedValue = $answer->getValue(); // will be either Yes or No
-                $selectedText = $answer->getText(); // will be either yes or no
-            }
+        // $this->ask($question, function (Answer $answer) {
+        //     // Detect if button was clicked:
+        //     if ($answer->isInteractiveMessageReply()) {
+        //         $selectedValue = $answer->getValue(); // will be either Yes or No
+        //         $selectedText = $answer->getText(); // will be either yes or no
+        //     }
 
-        $this->askPriceRange();
+        // $this->askPriceRange();
             
-        });
+        // });
+        $this->say('awww yeah');
     }
 
     public function askPriceRange()
