@@ -83,11 +83,28 @@ $botman = BotManFactory::create($config);
 // });
 
 $botman->hears('hello', function ($bot) {
-	$bot->reply(ButtonTemplate::create('hello?')
-		->addButton(ElementButton::create('Button1')->type('postback')->payload('https://botman.io'))
-		->addButton(ElementButton::create('Button2')->url('https://test.io'))
-	);
+	$bot->reply(ButtonTemplate::create('Welcome to 123 Main Street Bot - I see you are looking to purchase a home.  Are you looking to buy in:')
+		->addButton(ElementButton::create('1-3 months')->type('postback')->payload('https://botman.io'))
+    ->addButton(ElementButton::create('3-6 months')->url('https://test.io'))
+    ->addButton(ElementButton::create('6 months +')->url('https://test.io'))
+  );
 });
+//   $bot->ask('Whats your name?', function($answer, $bot) {
+//     $bot->say('Welcome '.$answer->getText()); //this never works
+// )}
+  // $bot->reply(ButtonTemplate::create('Great - Have you been prequalified by a mortgage loan officer yet?')
+  //   ->addButton(ElementButton::create('Yes')->type('postback')->payload('https://botman.io'))
+  //   ->addButton(ElementButton::create('No')->url('https://test.io'))
+// });
+
+
+
+// $botman->hears('Hello BotMan!', function($bot) {
+//   $bot->reply('Hello!');
+  // $bot->ask('Whats your name?', function($answer, $bot) {
+  //     $bot->say('Welcome '.$answer->getText()); //this never works
+  // });
+// });
 
 
 // Start listening
